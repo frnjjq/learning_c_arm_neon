@@ -48,15 +48,15 @@ void populateArray(int8_t array[], int8_t number)
 void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[])
 {
 
-    uint8x8_t op1; // declare a vector of eight by eight. It has 64 bits so it is a D register
-    uint8x8_t op2;
-    uint8x8_t result;
-    op1 = vld1_u8( array1);
-    op2 = vld1_u8( array2);
+    int8x8_t op1; // declare a vector of eight by eight. It has 64 bits so it is a D register
+    int8x8_t op2;
+    int8x8_t result;
+    op1 = vld1_s8( array1);
+    op2 = vld1_s8( array2);
 
-    result = vadd_u8( op1, op2)
+    result = vadd_s8( op1, op2);
 
-    vst1_u16( resultArr, result); // store the vector back to memory
+    vst1_s8( resultArr, result); // store the vector back to memory
 
     return;
 }
