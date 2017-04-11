@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include <neon_arm.h>
+#include <arm_neon.h>
 
 
 void populateArray(int8_t array[], int8_t lenght);
@@ -33,9 +33,16 @@ void populateArray(int8_t array[], int8_t lenght)
 
     for(int8_t i = 0; i< lenght/8; i=i+8)
     {
-        subvector = {i, i+1, i+2, i+3, i+4, i+5, i+6, i+7};
+        subvector[0] = i;
+        subvector[1] = i+1;
+        subvector[2] = i+2;
+        subvector[3] = i+3;
+        subvector[4] = i+4;
+        subvector[5] = i+5;
+        subvector[6] = i+6;
+        subvector[7] = i+7;
         vector = vld1_u8(subvector);
-        vst1_u8(vector[i], vector);
+        vst1_u8(&vector[i], vector);
 
     }
     return;
