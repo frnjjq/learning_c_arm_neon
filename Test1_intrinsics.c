@@ -13,7 +13,9 @@
 #define LENGHT 16
 
 void populateArray( int8_t array[], int8_t number);
+void increasingArray( int8_t array[]);
 void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
+void multArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
 void printResults(int8_t array[]);
 
 int main()
@@ -46,7 +48,7 @@ void populateArray(int8_t array[], int8_t number)
     return;
 }
 
-void increasingArray( int array[])
+void increasingArray( int8_t array[])
 {
     for(int i = 0; i< LENGHT; i++)
     {
@@ -63,13 +65,13 @@ void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[])
     op1 = vld1q_s8( array1);
     op2 = vld1q_s8( array2);
 
-    result = vadd_s8( op1, op2);
+    result = vaddq_s8( op1, op2);
 
     vst1_s8( resultArr, result); // store the vector back to memory
     return;
 }
 
-void multArray( int array1[], int array2[], int resultArr[])
+void multArray( int8_t array1[], int8_t array2[], int8_t resultArr[])
 {
     int8x16_t op1; // declare a vector of eight by eight. It has 64 bits so it is a Q register
     int8x16_t op2;
@@ -77,9 +79,9 @@ void multArray( int array1[], int array2[], int resultArr[])
     op1 = vld1q_s8( array1);
     op2 = vld1q_s8( array2);
 
-    result = vmul_s8( op1, op2);
+    result = vmulq_s8( op1, op2);
 
-    vst1_s8( resultArr, result); // store the vector back to memory
+    vst1q_s8( resultArr, result); // store the vector back to memory
 }
 
 void printResults(int8_t array[])
