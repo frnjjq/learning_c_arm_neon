@@ -67,7 +67,7 @@ void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[])
 
     result = vaddq_s8( op1, op2);
 
-    vst1_s8( resultArr, result); // store the vector back to memory
+    vst1q_s8( resultArr, result); // store the vector back to memory
     return;
 }
 
