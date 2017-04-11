@@ -1,49 +1,58 @@
 #include <stdio.h>
+#include <stdint.h>
+#include <time.h>
 
-void populateArray(int array[], int lenght);
-int sumArray(int array[], int lenght);
-void printResults(int array[], int *sum, int lenght);
+#define LENGHT 8
+
+void populateArray( int array[], int number);
+void sumArray( int array1[], int array2[], int resultArr[]);
+void printResults(int array[]);
 
 int main()
 {
-    printf("Test 1 on the Go!\n");
-    int lenght = 3;
-    int array[lenght];
-    populateArray( array, lenght);
-    int sum = sumArray( array, lenght);
-    printResults( array, &sum, lenght);
-    printf("Test 1 finished\n");
+    clock_t begin = clock();
+    printf("Test 1 running\n");
+
+    int array1[LENGHT];
+    int array2[LENGHT];
+    int result[LENGHT];
+
+    populateArray( array1, 1);
+    populateArray( array2, 2);
+
+    sumArray( array1, array2, result);
+    printResults( result);
+
+    clock_t end = clock();
+    printf("Finished execution. Duration: %f ms\n",(double)(end - begin)*1000 / CLOCKS_PER_SEC);
     return 0;
 }
 
-void populateArray(int array[], int lenght)
+void populateArray(int array[], int number)
 {
-    printf("populateArray called!\n");
-    for(int i = 0; i< lenght; i++)
+    for(int i = 0; i< LENGHT; i++)
     {
-        array[i] = i;
+        array[i] = number;
     }
     return;
 }
 
-int sumArray(int array[], int lenght)
+void sumArray( int array1[], int array2[], int resultArr[])
 {
-    printf("sumArray called!\n");
-    int sum = 0;
-    for(int i = 0; i< lenght; i++)
+
+    for(int i = 0; i< LENGHT; i++)
     {
-        sum += array[i];
+        resultArr[i] = array1[i] + array2[i];
     }
-    return sum;
+    return;
 }
 
-void printResults(int array[], int *sum, int lenght)
+void printResults(int array[])
 {
-    printf("printResults called!\n");
-    for(int i = 0; i< lenght; i++)
+    printf("Printing Results!\n");
+    for(int i = 0; i< LENGHT; i++)
     {
-        printf("Line number %d has a value of: %d\n", i, array[i]);
+        printf("Array[%d] = %d\n", i, array[i]);
     }
-    printf("The total sum of the array is: %d\n", *sum);
     return;
 }

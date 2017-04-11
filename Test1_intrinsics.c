@@ -2,70 +2,71 @@
  * Test1_intrinsics.c
  * This test imitates Test1 but it will use AMR NEON intrinsics to
  * perform the calculations required.
+ *
  */
 
 #include <stdio.h>
 #include <stdint.h>
 #include <arm_neon.h>
+#include <time.h>
 
+#define LENGHT 8
 
-void populateArray(int8_t array[], int8_t lenght);
-int sumArray(int8_t array[], int8_t lenght);
-void printResults(int8_t array[], int8_t *sum, int8_t lenght);
+void populateArray( int8_t array[], int8_t number);
+void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
+void printResults(int8_t array[]);
 
 int main()
 {
-    printf("Test1_instrinsics on the Go!\n");
-    int8_t lenght = 64;
-    int8_t array[lenght];
-    populateArray( array, lenght);
-    int8_t sum = sumArray( array, lenght);
-    printResults( array, &sum, lenght);
-    printf("Test 1 finished\n");
+    clock_t begin = clock();
+    printf("Test 1 instrinsics running\n");
+
+    int8_t array1[LENGHT];
+    int8_t array2[LENGHT];
+    int8_t result[LENGHT];
+
+    populateArray( array1, 1);
+    populateArray( array2, 2);
+
+    sumArray( array1, array2, result);
+    printResults( result);
+
+    clock_t end = clock();
+    printf("Finished execution. Duration: %f ms\n",(double)(end - begin)*1000 / CLOCKS_PER_SEC);
     return 0;
 }
 
-void populateArray(int8_t array[], int8_t lenght)
+void populateArray(int8_t array[], int8_t number)
 {
-    printf("populateArray called!\n");
-    uint8x8_t vector;
-    uint8_t subvector[8];
-
-    for(int8_t i = 0; i< lenght/8; i=i+8)
+    for(int i = 0; i< LENGHT; i++)
     {
-        subvector[0] = i;
-        subvector[1] = i+1;
-        subvector[2] = i+2;
-        subvector[3] = i+3;
-        subvector[4] = i+4;
-        subvector[5] = i+5;
-        subvector[6] = i+6;
-        subvector[7] = i+7;
-        vector = vld1_u8(subvector);
-        vst1_u8(&vector[i], vector);
-
+        array[i] = number;
     }
     return;
 }
 
-int8_t sumArray(int8_t array[], int8_t lenght)
+void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[])
 {
-    printf("sumArray called!\n");
-    int8_t sum = 0;
-    for(int8_t i = 0; i< lenght; i++)
-    {
-        sum += array[i];
-    }
-    return sum;
+
+    uint8x8_t op1; // declare a vector of eight by eight. It has 64 bits so it is a D register
+    uint8x8_t op2;
+    uint8x8_t result;
+    op1 = vld1_u8( array1);
+    op2 = vld1_u8( array2);
+
+    result = vadd_u8( op1, op2)
+
+    vst1_u16( resultArr, result); // store the vector back to memory
+
+    return;
 }
 
-void printResults(int8_t array[], int8_t *sum, int8_t lenght)
+void printResults(int8_t array[])
 {
-    printf("printResults called!\n");
-    for(int8_t i = 0; i< lenght; i++)
+    printf("Printing Results!\n");
+    for(int i = 0; i< LENGHT; i++)
     {
-        printf("Line number %d has a value of: %d\n", i, array[i]);
+        printf("Array[%d] = %d\n", i, array[i]);
     }
-    printf("The total sum of the array is: %d\n", *sum);
     return;
 }
