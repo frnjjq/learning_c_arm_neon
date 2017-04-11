@@ -2,10 +2,12 @@
 #include <stdint.h>
 #include <time.h>
 
-#define LENGHT 8
+#define LENGHT 16
 
 void populateArray( int array[], int number);
+void increasingArray( int array[]);
 void sumArray( int array1[], int array2[], int resultArr[]);
+void multArray( int array1[], int array2[], int resultArr[]);
 void printResults(int array[]);
 
 int main()
@@ -17,10 +19,11 @@ int main()
     int array2[LENGHT];
     int result[LENGHT];
 
-    populateArray( array1, 1);
-    populateArray( array2, 2);
+    populateArray( array1, 8);
+    increasingArray( array2);
 
-    sumArray( array1, array2, result);
+    //sumArray( array1, array2, result);
+    multArray( array1, array2, result);
     printResults( result);
 
     clock_t end = clock();
@@ -37,12 +40,29 @@ void populateArray(int array[], int number)
     return;
 }
 
+void increasingArray( int array[])
+{
+    for(int i = 0; i< LENGHT; i++)
+    {
+        array[i] = i;
+    }
+    return;
+}
+
 void sumArray( int array1[], int array2[], int resultArr[])
 {
-
     for(int i = 0; i< LENGHT; i++)
     {
         resultArr[i] = array1[i] + array2[i];
+    }
+    return;
+}
+
+void multArray( int array1[], int array2[], int resultArr[])
+{
+    for(int i = 0; i< LENGHT; i++)
+    {
+        resultArr[i] = array1[i] * array2[i];
     }
     return;
 }
