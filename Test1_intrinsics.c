@@ -27,7 +27,7 @@ int main()
     int8_t array2[LENGHT];
     int8_t result[LENGHT];
 
-    populateArray( array1, 1);
+    populateArray( array1, 8);
     increasingArray( array2);
 
     //sumArray( array1, array2, result);
