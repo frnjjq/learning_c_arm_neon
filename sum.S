@@ -3,7 +3,12 @@
  * before
  */
 
-function _sumArray, export=1
+.data
+
+.text
+
+.globl _sumArray
+_sumArray:
     VLD1.8  D0, [R1]!
     VLD1.8  D1, [R1]
 
@@ -16,4 +21,3 @@ function _sumArray, export=1
     VST1.8  D5, [R3]!
 
     bx       lr
-endfunc
