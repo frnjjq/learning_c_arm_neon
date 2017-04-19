@@ -5,21 +5,21 @@
 
 #define LENGHT 16
 
-void populateArray( int array[], int number);
-void increasingArray( int array[]);
-void sumArray( int array1[], int array2[], int resultArr[]);
-void _sumArray( int array1[], int array2[], int resultArr[]);
-void multArray( int array1[], int array2[], int resultArr[]);
-void printResults(int array[]);
+void populateArray( int8_t array[], int8_t number);
+void increasingArray( int8_t array[]);
+void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
+void _sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
+void multArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
+void printResults(int8_t array[]);
 
 int main()
 {
     clock_t begin = clock();
     printf("Test 1 running\n");
 
-    int array1[LENGHT];
-    int array2[LENGHT];
-    int result[LENGHT];
+    int8_t array1[LENGHT];
+    int8_t array2[LENGHT];
+    int8_t result[LENGHT];
 
     printf("Array Declared");
     populateArray( array1, 8);
@@ -29,16 +29,16 @@ int main()
     //sumArray( array1, array2, result);
     //multArray( array1, array2, result);
     printf("Calling ASM");
-    _sumArray( array1, array2, result);
+    //_sumArray( array1, array2, result);
     printf("fINISHED asm ASM");
-    printResults( result);
+    //printResults( result);
 
     clock_t end = clock();
     printf("Finished execution. Duration: %f ms\n",(double)(end - begin)*1000 / CLOCKS_PER_SEC);
     return 0;
 }
 
-void populateArray(int array[], int number)
+void populateArray(int8_t array[], int8_t number)
 {
     for(int i = 0; i< LENGHT; i++)
     {
@@ -47,7 +47,7 @@ void populateArray(int array[], int number)
     return;
 }
 
-void increasingArray( int array[])
+void increasingArray( int8_t array[])
 {
     for(int i = 0; i< LENGHT; i++)
     {
@@ -56,7 +56,7 @@ void increasingArray( int array[])
     return;
 }
 
-void sumArray( int array1[], int array2[], int resultArr[])
+void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[])
 {
     for(int i = 0; i< LENGHT; i++)
     {
@@ -65,7 +65,7 @@ void sumArray( int array1[], int array2[], int resultArr[])
     return;
 }
 
-void multArray( int array1[], int array2[], int resultArr[])
+void multArray( int8_t array1[], int8_t array2[], int8_t resultArr[])
 {
     for(int i = 0; i< LENGHT; i++)
     {
@@ -74,7 +74,7 @@ void multArray( int array1[], int array2[], int resultArr[])
     return;
 }
 
-void printResults(int array[])
+void printResults(int8_t array[])
 {
     printf("Printing Results!\n");
     for(int i = 0; i< LENGHT; i++)
