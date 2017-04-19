@@ -11,7 +11,7 @@
 # The actual code
 .section .text
 .globl _sumArray
-.type _sumArray, @function
+.type _sumArray,@function
 
 _sumArray:
     VLD1.8  D0, [R1]!
