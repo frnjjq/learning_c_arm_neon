@@ -21,16 +21,14 @@ int main()
     int8_t array2[LENGHT];
     int8_t result[LENGHT];
 
-    printf("Array Declared/n");
     populateArray( array1, 8);
-    printf("Array Populated/n");
     increasingArray( array2);
 
     //sumArray( array1, array2, result);
     //multArray( array1, array2, result);
-    printf("Calling ASM/n");
+    printf("Calling ASM\n");
     _sumArray( array1, array2, result);
-    printf("Finished ASM part/n");
+    printf("Finished ASM part\n");
     printResults( result);
 
     clock_t end = clock();
