@@ -21,7 +21,9 @@ int main()
     int array2[LENGHT];
     int result[LENGHT];
 
+    printf("Array Declared");
     populateArray( array1, 8);
+    printf("Array Populated");
     increasingArray( array2);
 
     //sumArray( array1, array2, result);
