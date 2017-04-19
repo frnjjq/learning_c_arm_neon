@@ -11,7 +11,7 @@
 # The actual code
 .section .text
 .globl _sumArray
-.type _sumArray,@function
+.func  _sumArray
 
 _sumArray:
     VLD1.8  D0, [R1]!
@@ -26,3 +26,5 @@ _sumArray:
     VST1.8  D5, [R3]!
 
     bx       lr
+
+.endfunc
