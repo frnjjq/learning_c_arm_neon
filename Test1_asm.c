@@ -26,7 +26,7 @@ int main()
 
     //sumArray( array1, array2, result);
     //multArray( array1, array2, result);
-    _sumArray( array1, array2, resultArr);
+    _sumArray( array1, array2, result);
     printResults( result);
 
     clock_t end = clock();
