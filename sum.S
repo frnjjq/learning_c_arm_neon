@@ -3,11 +3,16 @@
  * before
  */
 
-.data
+# A program to be called from a C program
+# Declaring data that doesn't change
+.section .data
 
-.text
 
+# The actual code
+.section .text
 .globl _sumArray
+.type _sumArray, @function
+
 _sumArray:
     VLD1.8  D0, [R1]!
     VLD1.8  D1, [R1]

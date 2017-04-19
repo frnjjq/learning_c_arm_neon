@@ -8,7 +8,7 @@
 void populateArray( int8_t array[], int8_t number);
 void increasingArray( int8_t array[]);
 void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
-void _sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
+extern void _sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
 void multArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
 void printResults(int8_t array[]);
 
@@ -21,17 +21,17 @@ int main()
     int8_t array2[LENGHT];
     int8_t result[LENGHT];
 
-    printf("Array Declared");
+    printf("Array Declared/n");
     populateArray( array1, 8);
-    printf("Array Populated");
+    printf("Array Populated/n");
     increasingArray( array2);
 
     //sumArray( array1, array2, result);
     //multArray( array1, array2, result);
-    printf("Calling ASM");
-    //_sumArray( array1, array2, result);
-    printf("fINISHED asm ASM");
-    //printResults( result);
+    printf("Calling ASM/n");
+    _sumArray( array1, array2, result);
+    printf("Finished ASM part/n");
+    printResults( result);
 
     clock_t end = clock();
     printf("Finished execution. Duration: %f ms\n",(double)(end - begin)*1000 / CLOCKS_PER_SEC);
