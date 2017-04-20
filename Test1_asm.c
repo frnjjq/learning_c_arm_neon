@@ -1,13 +1,6 @@
-/*
- * Test1_intrinsics.c
- * This test imitates Test1 but it will use AMR NEON intrinsics to
- * perform the calculations required.
- *
- */
 
 #include <stdio.h>
 #include <stdint.h>
-#include <arm_neon.h>
 #include <time.h>
 
 #define LENGHT 16
@@ -15,13 +8,14 @@
 void populateArray( int8_t array[], int8_t number);
 void increasingArray( int8_t array[]);
 void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
+extern void _sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
 void multArray( int8_t array1[], int8_t array2[], int8_t resultArr[]);
 void printResults(int8_t array[]);
 
 int main()
 {
     clock_t begin = clock();
-    printf("Test 1 instrinsics running\n");
+    printf("Test 1 running\n");
 
     int8_t array1[LENGHT];
     int8_t array2[LENGHT];
@@ -31,7 +25,12 @@ int main()
     increasingArray( array2);
 
     //sumArray( array1, array2, result);
-    multArray( array1, array2, result);
+    //multArray( array1, array2, result);
+    printf("Calling ASM\n");
+    _sumArray( array1, array2, result);
+    printf("Finished ASM part\n");
+    printResults( array1);
+    printResults( array2);
     printResults( result);
 
     clock_t end = clock();
@@ -59,29 +58,20 @@ void increasingArray( int8_t array[])
 
 void sumArray( int8_t array1[], int8_t array2[], int8_t resultArr[])
 {
-    int8x16_t op1; // declare a vector of eight by eight. It has 64 bits so it is a Q register
-    int8x16_t op2;
-    int8x16_t result;
-    op1 = vld1q_s8( array1);
-    op2 = vld1q_s8( array2);
-
-    result = vaddq_s8( op1, op2);
-
-    vst1q_s8( resultArr, result); // store the vector back to memory
+    for(int i = 0; i< LENGHT; i++)
+    {
+        resultArr[i] = array1[i] + array2[i];
+    }
     return;
 }
 
 void multArray( int8_t array1[], int8_t array2[], int8_t resultArr[])
 {
-    int8x16_t op1; // declare a vector of eight by eight. It has 64 bits so it is a Q register
-    int8x16_t op2;
-    int8x16_t result;
-    op1 = vld1q_s8( array1);
-    op2 = vld1q_s8( array2);
-
-    result = vmulq_s8( op1, op2);
-
-    vst1q_s8( resultArr, result); // store the vector back to memory
+    for(int i = 0; i< LENGHT; i++)
+    {
+        resultArr[i] = array1[i] * array2[i];
+    }
+    return;
 }
 
 void printResults(int8_t array[])
