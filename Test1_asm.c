@@ -19,7 +19,7 @@ int main()
 
     int8_t array1[LENGHT];
     int8_t array2[LENGHT];
-    int8_t result[LENGHT];
+    int8_t result[LENGHT] = {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
 
     populateArray( array1, 8);
     increasingArray( array2);
