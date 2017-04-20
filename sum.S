@@ -20,7 +20,7 @@ _sumArray:
     VLD1.8  D2, [R1]!
     VLD1.8  D3, [R1]
 
-    VADD.I8 Q3, Q0, Q1
+    VADD.I8 Q2, Q0, Q1
 
     VST1.8  D4, [R2]!
     VST1.8  D5, [R2]
