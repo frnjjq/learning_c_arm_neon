@@ -29,6 +29,8 @@ int main()
     printf("Calling ASM\n");
     _sumArray( array1, array2, result);
     printf("Finished ASM part\n");
+    printResults( array1);
+    printResults( array2);
     printResults( result);
 
     clock_t end = clock();

@@ -22,8 +22,10 @@ int main()
     populateArray( array1, 8);
     increasingArray( array2);
 
-    //sumArray( array1, array2, result);
-    multArray( array1, array2, result);
+    sumArray( array1, array2, result);
+    //multArray( array1, array2, result);
+    printResults( array1);
+    printResults( array2);
     printResults( result);
 
     clock_t end = clock();
